@@ -1,0 +1,343 @@
+/*Информатор новых сообщений*/
+.img-badge {
+    position: absolute;
+    top: 15px;
+    left: 45px;
+    padding: 0.35em 0.65em;
+    font-size: 0.75em;
+    font-weight: 700;
+    font-family: Roboto, sans-serif;
+    color: #fff;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: 50rem;
+    background-color: #dc3545;
+}
+
+/*Выпадающее меню списка новых сообщений*/
+.dropdown-menu {
+    position: absolute;
+    z-index: 1000;
+    display: none;
+    min-width: 18rem;
+    padding: 0.5rem 0;
+    margin: 0;
+    background-color: #fff;
+    box-shadow: var(--shadow);
+    border-radius: 0.5em;
+    list-style: none;
+}
+
+.dropdown-menu.show {
+    display: block;
+}
+
+/*Новые сообщения*/
+.dropdown-item {
+    display: flex;
+    align-items: center;
+    padding-right: 1rem;
+    margin: 0.5rem 0;
+    clear: both;
+    text-decoration: none;
+    color: var(--color-text-main);
+    font-family: Roboto, sans-serif;
+}
+
+.dropdown-item:hover, .dropdown-item:focus {
+    color: #1e2125;
+    background-color: #f2f4f5;
+}
+
+.dropdown-divider {
+    height: 0;
+    margin: 0.5rem 0;
+    overflow: hidden;
+    border-top: 1px solid rgba(0, 0, 0, 0.15);
+}
+
+/*Новое сообщение*/
+.message {
+    display: flex;
+    flex-direction: column;
+    flex-basis: 100%;
+    margin: 0.5rem 0;
+    font-size: .8rem;
+}
+
+/*Иконка сообщения*/
+.message-icon {
+    width: 25px;
+    height: 25px;
+    color: inherit;
+    fill: #22a4d8;
+    margin: 0 1rem;
+}
+
+/*Иконка сообщения - Нет сообщений*/
+.no-message {
+    fill: #22d831 !important;
+}
+
+/*Заголовок сообщения*/
+.message-title {
+    font-weight: 600;
+    margin-bottom: 0.3rem;
+    font-size: .9rem;
+}
+
+/*Автор сообщения*/
+.message-author {
+    font-style: italic;
+    font-weight: 500;
+    margin-bottom: 0.1rem;
+}
+
+/*Время сообщения*/
+.message-time {
+    /*text-align: right;*/
+}
+
+/*Надпись - Показать все сообщения*/
+.all-messages {
+    display: block;
+    text-align: center;
+    font-weight: 600;
+    margin-bottom: 0;
+    font-size: .8rem;
+    padding: 1rem 0;
+}
+
+/*Подложка под основной контент*/
+.container {
+    margin-top: 100px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+}
+
+/*Боковое меню*/
+.sidebar {
+    color: var(--color-text-main);
+    background: #fff;
+    max-width: 250px;
+    min-width: 250px;
+    max-height: calc(100vh - 160px);
+    min-height: calc(100vh - 160px);
+    overflow: scroll;
+    position: sticky;
+    top: 100px;
+    box-shadow: var(--shadow);
+    margin: 0 1%;
+    border-radius: .5em;
+}
+
+/*Шапка бокового меню*/
+.sidebar-header {
+    display: flex;
+    align-items: center;
+    padding: 1.5rem 1rem;
+    text-decoration: none;
+    opacity: .7;
+}
+
+.sidebar-header:hover,
+.sidebar-header:focus {
+    opacity: 1;
+}
+
+/*Аватрка пользователя*/
+.avatar {
+    display: inline-block;
+    position: relative;
+    width: 3rem;
+    text-align: center;
+    border-radius: 50%;
+    box-shadow: var(--shadow-sm);
+    background: #fff;
+    line-height: 3rem;
+    max-width: 100%;
+    height: auto;
+    margin-left: 0.2rem;
+}
+
+/*Контейнер для текстовой шапки бокового меню*/
+.sidebar-header_title {
+    margin-left: 1rem;
+    font-family: Roboto, sans-serif;
+    color: var(--color-text-main);
+}
+
+/*Имя пользователя*/
+.user-name {
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+/*Должность пользователя*/
+.job-title {
+    font-size: 0.875rem;
+    font-weight: 400;
+    margin-bottom: 0;
+    line-height: 1;
+}
+
+/*Подразделение пользователя*/
+.division {
+    display: flex;
+    font-family: Roboto, sans-serif;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: var(--color-text-main);
+    font-size: 1rem;
+    letter-spacing: 0;
+    padding-left: 20px;
+}
+
+/*Содержание бокового меню*/
+.sidebar-items {
+    padding-left: 0;
+    list-style: none;
+}
+
+/*Активное меню*/
+.sidebar-item.active > .sidebar-link {
+    color: #fff;
+    border-left: 4px solid #1A5B93;
+    background: #74ccf5;
+}
+
+/*Пункт меню*/
+.sidebar-link {
+    display: flex;
+    position: relative;
+    overflow: hidden;
+    padding: 10px 15px;
+    font-family: Roboto, sans-serif;
+    text-decoration: none;
+    text-overflow: ellipsis;
+    color: inherit;
+    border-left: 4px solid transparent;
+    font-size: 1rem;
+    font-weight: 300;
+    align-items: center;
+}
+
+/*Наведение курсора на на неактивное меню*/
+.sidebar-link:hover {
+    color: #fff;
+    border-left: 4px solid #1A5B93;
+    background: #22a4d8;
+    fill: #fff;
+}
+
+/*Иконка*/
+.svg-sidebar {
+    width: 20px;
+    height: 20px;
+    vertical-align: text-bottom;
+    color: inherit;
+    fill: currentColor;
+    margin-right: 0.5rem
+}
+
+
+/*Подложка под подвал*/
+.footer {
+    position: fixed;
+    bottom: 0;
+    height: 50px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    background-color: #EEF5F9;
+}
+
+/*Подвал*/
+.footer-content {
+    width: 98%;
+    height: 80%;
+    background: var(--color-gradient-reverse);
+    box-shadow: var(--shadow);
+    border-radius: .5em;
+}
+
+@media (max-width: 768px) {
+
+    .img-badge {
+        position: absolute;
+        top: 8px;
+        left: 28px;
+        padding: 0.35em 0.65em;
+        font-size: 0.55em;
+    }
+
+    .container {
+        margin-top: 50px;
+    }
+
+
+    .sidebar {
+        max-width: 90px;
+        min-width: 90px;
+        max-height: calc(100vh - 90px);
+        min-height: calc(100vh - 90px);
+        text-align: center;
+        box-shadow: var(--shadow-sm);
+        top: 50px;
+    }
+
+    .add-news {
+        font-size: .7rem;
+    }
+
+    .footer {
+        height: 40px;
+    }
+
+    .footer-content {
+        height: 100%;
+        width: 100%;
+        box-shadow: none;
+
+    }
+
+    .header {
+        height: 80px;
+    }
+
+    .nav {
+        box-shadow: var(--shadow-sm);
+        margin-top: 0;
+    }
+
+    .sidebar-header_title {
+        display: none;
+    }
+
+    .sidebar-text {
+        margin-top: 10px;
+        font-size: 0.8rem;
+        font-weight: 500;
+    }
+
+    .svg-sidebar {
+        width: 30px;
+        height: 30px;
+        margin: 0 auto;
+    }
+
+    .sidebar-link {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .division {
+        font-size: 0.8rem;
+        justify-content: center;
+        padding: 0 0.5em;
+    }
+}

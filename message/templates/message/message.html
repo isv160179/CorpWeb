@@ -1,0 +1,53 @@
+{% load static %}
+{#            Кнопка-извещение о новых сообщениях#}
+<a href="#" class="button-item" id="dropdownMessages" data-bs-toggle="dropdown" aria-expanded="false"
+   data-bs-offset="-24,-17">
+    <svg class="nav-img">
+        <use href="{% static 'main/img/sprite.svg' %}#letter"></use>
+    </svg>
+    {#                    Количество новых сообщений#}
+    {% if messages_count > 0 %}
+        <span class="img-badge">
+                    {% if messages_count < 10 %} {{ messages_count }}
+                    {% else %} 9+
+                    {% endif %}
+                    </span>
+    {% endif %}
+</a>
+{#            Выпадающее меню - список новых сообщений#}
+<ul class="dropdown-menu" aria-labelledby="dropdownMessages" aria-labelledby="dropdownMenuOffset">
+    {% for message in messages|slice:":3" %}
+        <li><a class="dropdown-item" href="#">
+            <svg class="message-icon">
+                <use href="{% static 'main/img/sprite.svg' %}#info"></use>
+            </svg>
+            <div class="message">
+                <span class="message-title">
+                    {{ message.subject }}
+                </span>
+                <small class="message-author">
+                    От: {{ message.sender }}
+                </small>
+                <small class="message-time">
+                    {{ message.sent_at }}
+                </small>
+            </div>
+        </a></li>
+    {% endfor %}
+    {% if messages_count == 0 %}
+        <li><a class="dropdown-item" href="#">
+            <svg class="message-icon no-message">
+                <use href="{% static 'main/img/sprite.svg' %}#check"></use>
+            </svg>
+            <div class="message">
+                <span class="message-title">
+                    У Вас нет новых сообщений
+                </span>
+            </div>
+        </a></li>
+    {% endif %}
+    <li>
+        <hr class="dropdown-divider">
+    </li>
+    <li><a class="dropdown-item all-messages" href="#">Посмотреть все сообщения</a></li>
+</ul>

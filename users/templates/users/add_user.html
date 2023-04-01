@@ -1,0 +1,47 @@
+{% extends 'main/index.html' %}
+{% load static %}
+{% block extra_links_detail %}
+    <link rel="stylesheet" href="{% static 'users/css/style_for_add_user.css' %}">
+{% endblock %}
+{% block content_detail %}
+    <div class="container-detail ">
+        <form action="{% url 'add_user' %}" method="post">
+            {% csrf_token %}
+            <div class="form-window">
+                <div class="form-window_title">
+                    Укажите данные нового сотрудника
+                    <a href='{% url 'users' %}' class="form-cancel">
+                        <svg class="form-img">
+                            <use href="{% static 'users/img/sprite.svg' %}#back"></use>
+                        </svg>
+                    </a>
+                </div>
+                <div class="form-window_body">
+                    <div class="form_elements">{{ form.name }}</div>
+                    <div class="form_error">{{ form.name.errors }}</div>
+                    <div class="form_elements">{{ form.surname }}</div>
+                    <div class="form_error">{{ form.surname.errors }}</div>
+                    <div class="form_elements">{{ form.email }}</div>
+                     <div class="form_error">{{ form.email.errors }}</div>
+                    <div class="form_error">{{ form.non_field_errors }}</div>
+                    <div class="form_elements">{{ form.department }}</div>
+                    <div class="form_elements">{{ form.job_title }}</div>
+                    <div class="check-box_container">
+                        <div class="form_check-box">{{ form.is_manager }}</div>
+                        <div class="form_label">{{ form.is_manager.label }}</div>
+                    </div>
+                    <div class="form_help-text">{{ form.is_manager.help_text }}</div>
+                    <div class="check-box_container">
+                        <div class="form_check-box">{{ form.is_hr }}</div>
+                        <div class="form_label">{{ form.is_hr.label }}</div>
+                    </div>
+                    <div class="form_help-text">{{ form.is_hr.help_text }}</div>
+
+                </div>
+                <div class="form-window_footer">
+                    <button class="form-window_button" type="submit">Добавить</button>
+                </div>
+            </div>
+        </form>
+    </div>
+{% endblock %}

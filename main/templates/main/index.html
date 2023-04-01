@@ -1,0 +1,112 @@
+{% extends 'main/base.html' %}
+{% load message_tags %}
+{% load static %}
+
+{% block extra_links %}
+    {% block extra_links_detail %}
+    {% endblock %}
+    <link rel="stylesheet" href="{% static 'main/css/style_index.css' %}">
+{% endblock %}
+
+{% block extra_buttons %}
+    {# Кнопка-извещение о новых сообщениях #}
+    {% show_messages request.user %}
+{% endblock %}
+
+{% block content %}
+    <main class="container">
+        {# Боковое меню#}
+        <nav class="sidebar">
+            {# Шапка бокового меню#}
+            <a href="#" class="sidebar-header">
+                {#            <a href="{% url 'settings' %}" class="sidebar-header">#}
+                {% if request.user.avatar %}
+                    <img class="avatar" src="{{ request.user.avatar.avatar.url }}" alt="...">
+                {% else %}
+                    <img class="avatar" src="{% static 'users/img/default_avatar.png' %}" alt="...">
+                {% endif %}
+                <div class="sidebar-header_title">
+                    <h3 class="user-name">{{ request.user }} </h3>
+                    <p class="job-title">{{ request.user.job_title }}</p>
+                </div>
+            </a>
+            {# Наименование подразделения#}
+            <span class="division">{{ request.user.department }}</span>
+            {# Тело бокового меню#}
+            <ul class="sidebar-items">
+                {% for menu_item in menu %}
+                    {% if menu_item.pk == menu_selected %}
+                        <li class="sidebar-item active">
+                            <div class="sidebar-link">
+                                {# Иконка меню #}
+                                <svg class="svg-sidebar">
+                                    <use href="{% static 'main/img/sprite.svg' %}#{{ menu_item.slug }}"></use>
+                                </svg>
+                                {# Текст меню#}
+                                <div class="sidebar-text">{{ menu_item.title }}</div>
+                            </div>
+                        </li>
+                    {% else %}
+                        <li class="sidebar-item">
+                            {#                            <a href="#" class="sidebar-link">#}
+                            <a href="{% url menu_item.slug %}" class="sidebar-link">
+                                {# Иконка меню #}
+                                <svg class="svg-sidebar">
+                                    <use href="{% static 'main/img/sprite.svg' %}#{{ menu_item.slug }}"></use>
+                                </svg>
+                                {# Текст меню #}
+                                <div class="sidebar-text">{{ menu_item.title }}</div>
+                            </a>
+                        </li>
+                    {% endif %}
+                {% endfor %}
+                {% if request.user.is_manager %}
+                    {% if menu_selected == 6 %}
+                        <li class="sidebar-item active">
+                            <div class="sidebar-link">
+                                <svg class="svg-sidebar">
+                                    <use href="{% static 'main/img/sprite.svg' %}#add_user"></use>
+                                </svg>
+                                <div class="sidebar-text">Мои коллеги</div>
+                            </div>
+                        </li>
+                    {% else %}
+                        <li class="sidebar-item">
+                            <a href="{% url 'users' %}" class="sidebar-link">
+                                {# Иконка меню #}
+                                <svg class="svg-sidebar">
+                                    <use href="{% static 'main/img/sprite.svg' %}#add_user"></use>
+                                </svg>
+                                {# Текст меню #}
+                                <div class="sidebar-text">Мои коллеги</div>
+                            </a>
+                        </li>
+                    {% endif %}
+                {% endif %}
+            </ul>
+        </nav>
+        {#    Основной контент#}
+        {% block content_detail %}
+        {% endblock %}
+    </main>
+{% endblock %}
+
+{% block footer %}
+    <footer class="footer">
+        <div class="footer-content"></div>
+    </footer>
+{% endblock %}
+
+{% block extra_scripts %}
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+            integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/js-cookie/3.0.1/js.cookie.min.js"
+            integrity="sha512-wT7uPE7tOP6w4o28u1DN775jYjHQApdBnib5Pho4RB0Pgd9y7eSkAV1BTqQydupYDB9GBhTcQQzyNMPMV3cAew=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    
+{% endblock %}

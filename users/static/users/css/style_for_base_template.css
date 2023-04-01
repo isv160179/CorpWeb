@@ -1,0 +1,180 @@
+/* Общее для форм связанных с авторизацией */
+.form_elements {
+    height: 40px;
+    width: 80%;
+    margin: 10px auto;
+    position: relative;
+}
+
+.form_error {
+    color: var(--color-acept);
+    font-size: 0.8em;
+    padding: 0 25px 0 10px;
+
+}
+
+.form_input {
+    width: 100%;
+    border: none;
+    background-color: #ffffff;
+    border-bottom: .5px solid rgba(77, 130, 162, 0.51);
+    font-family: Roboto, sans-serif;
+    font-size: 1.2em;
+    color: var(--color-text-main);
+}
+
+.form_password {
+    width: 90%;
+    padding-right: 20px;
+}
+
+.form-cancel {
+    position: absolute;
+    background-color: var(--color-middle);
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    top: 23px;
+    left: -15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--shadow);
+}
+
+.form-img {
+    width: 15px;
+    height: 15px;
+    fill: white;
+    opacity: 0.7;
+}
+
+.form-img:hover,
+.form-img:focus {
+    opacity: 1;
+}
+
+.form-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: calc(100vh - 150px);
+}
+
+.form-window {
+    background-color: #ffffff;
+    box-shadow: var(--shadow);
+    border-radius: .5rem;
+    width: 280px;
+    /*height: 400px;*/
+    display: flex;
+    flex-direction: column;
+    font-family: Roboto, sans-serif;
+    color: var(--color-text-main);
+}
+
+.form-window_title {
+    height: 80px;
+    text-align: center;
+    line-height: 80px;
+    font-size: 1em;
+    font-weight: 400;
+    color: whitesmoke;
+    background-color: var(--color-middle);
+    border-top-left-radius: .5em;
+    border-top-right-radius: .5em;
+    position: relative;
+    margin-bottom: 30px;
+}
+
+.form-window_body {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    position: relative;
+}
+
+.form_link {
+    font-family: Roboto, sans-serif;
+    font-size: .7em;
+    color: var(--color-text-main);
+    text-transform: uppercase;
+    margin-left: 30px;
+}
+
+.form-window_footer {
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--color-middle);
+    border-bottom-left-radius: .5em;
+    border-bottom-right-radius: .5em;
+}
+
+.form-window_button {
+    width: 50%;
+    height: 60%;
+    background-color: var(--color-acept);
+    color: whitesmoke;
+    font-family: Montserrat, sans-serif;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    border: none;
+    border-radius: 50em;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+    transition: background-color .5s ease-out;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.form-window_button:hover,
+.form-window_button:focus {
+    color: var(--color-acept);
+    background-color: white;
+    opacity: .8;
+}
+
+.form_text {
+    padding: 0 20px 20px;
+    font-size: .9em;
+}
+
+.captcha-block {
+    display: flex;
+    width: 80%;
+    margin: 0 auto;
+    flex-direction: row;
+    justify-content: space-between;
+    opacity: 0.8;
+}
+
+#id_captcha_1 {
+    border: none;
+    border-bottom: .5px solid rgba(77, 130, 162, 0.51);
+    font-family: Roboto, sans-serif;
+    font-size: 20px;
+    color: var(--color-text-main);
+    text-align: center;
+    width: 100px;
+}
+
+.eye-img {
+    width: 20px;
+    height: 17px;
+    position: absolute;
+    right: 1px;
+    top:5px;
+    fill: var(--color-text-main);
+    opacity: 0.7;
+    cursor: pointer;
+}
+
+.eye-img:hover,
+.eye-img:focus {
+    opacity: 1;
+}

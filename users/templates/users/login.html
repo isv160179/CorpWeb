@@ -1,0 +1,33 @@
+{% extends 'users/users_base.html' %}
+{% load static %}
+
+{% block users-form_title %}
+    Войдите, чтобы продолжить
+    <a href='{% url 'home' %}' class="form-cancel">
+        <svg class="form-img">
+            <use href="{% static 'users/img/sprite.svg' %}#back"></use>
+        </svg>
+    </a>
+{% endblock %}
+
+{% block users-form_elements %}
+    <div class="form_elements">{{ form.username }}</div>
+    <div class="form_error">{{ form.username.errors }}</div>
+    <div class="form_elements">{{ form.password }}
+        <svg class="eye-img">
+            <use id="togglePassword" href="{% static 'users/img/sprite.svg' %}#eye"></use>
+        </svg>
+    </div>
+    <div class="form_error">{{ form.non_field_errors }}</div>
+    <div class="captcha-block">{{ form.captcha }}</div>
+    <div class="form_error">{{ form.captcha.errors }}</div>
+    <p><a class="form_link" href="{% url 'password_reset' %}">Забыли пароль?</a></p>
+{% endblock %}
+
+{% block users-form_footer %}
+    <button class="form-window_button" type="submit">Войти</button>
+{% endblock %}
+
+{% block extra_scripts %}
+    <script src="{% static 'users/js/app_login.js' %}"></script>
+{% endblock %}

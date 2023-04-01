@@ -1,0 +1,83 @@
+{% extends 'main/index.html' %}
+{% load news_tags %}
+{% load static %}
+{% block extra_links_detail %}
+    <link rel="stylesheet" href="{% static 'news/css/style-news_list.css' %}">
+{% endblock %}
+{% block content_detail %}
+    <div class="container-detail">
+        {# Шапка контента #}
+        <div class="content-header">
+            <div class="content-header_left">
+                {# Пагинация кнопка назад #}
+                {% if page_obj.has_other_pages and page_obj.has_previous %}
+                    <a href="?page={{ page_obj.previous_page_number }}">
+                        <svg class="svg-paginator">
+                            <use href="{% static 'news/img/sprite.svg' %}#left"></use>
+                        </svg>
+                    </a>
+                {% elif page_obj.has_other_pages %}
+                    <a href="{{ page_obj.current_page_number }}">
+                        <svg class="svg-paginator">
+                            <use href="{% static 'news/img/sprite.svg' %}#stop"></use>
+                        </svg>
+                    </a>
+                {% endif %}
+            </div>
+                {# Кнопка добавить новость #}
+            <div class="content-header_center">
+                <a href="{% url 'add_news' %}" class="add-news">добавить новость</a>
+            </div>
+            <div class="content-header_right">
+                {# Пагинация кнопка вперед #}
+                {% if page_obj.has_other_pages and page_obj.has_next %}
+                    <a href="?page={{ page_obj.next_page_number }}">
+                        <svg class="svg-paginator">
+                            <use href="{% static 'news/img/sprite.svg' %}#right"></use>
+                        </svg>
+                    </a>
+                {% elif page_obj.has_other_pages %}
+                    <a href="{{ page_obj.current_page_number }}">
+                        <svg class="svg-paginator">
+                            <use href="{% static 'news/img/sprite.svg' %}#stop"></use>
+                        </svg>
+                    </a>
+                {% endif %}
+            </div>
+        </div>
+        {# Тело контента #}
+        <div class="content-body">
+            {% for post in news %}
+                <div class="container-news">
+                    <div class="container-news_img">
+                        {% if post.image %}
+                            <img src="{{ post.image.url }}" alt="Фото новости" class="news-image">
+                        {% else %}
+                            <img src="{% static 'news/img/default-news.png' %}" alt="Фото новости" class="news-image">
+                        {% endif %}
+                    </div>
+                    <div class="container-news_content">
+                        <div class="container-news_body">{{ post.title }}</div>
+                        <div class="container-news_footer">
+                            <div class="container-news_footer_icons">
+                                <a href="{{ post.get_absolute_url }}#news_likes" class="news-icon">{{ post.news_likes.count }}
+                                    <svg class="svg-news">
+                                        <use href="{% static 'news/img/sprite.svg' %}#like"></use>
+                                    </svg>
+                                </a>
+                                <a href="{{ post.get_absolute_url }}#news_comments" class="news-icon">{{ post.news_comments.count }}
+                                    <svg class="svg-news">
+                                        <use href="{% static 'news/img/sprite.svg' %}#comment"></use>
+                                    </svg>
+                                </a>
+                            </div>
+                            <div class="container-news_footer_button">
+                                <a href="{{ post.get_absolute_url }}" class="news-detail">Подробнее</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

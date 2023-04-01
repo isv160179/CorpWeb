@@ -1,0 +1,13 @@
+{% extends 'main/index.html' %}
+{% load static %}
+{% block extra_links_detail %}
+    <link rel="stylesheet" href="{% static 'users/css/style_for_list_users.css' %}">
+{% endblock %}
+{% block content_detail %}
+    <div class="container-detail">
+    Добро пожаловать, {{ user }}!
+    <a href="{% url 'add_user' %}">Принять сотрудника</a>
+    </div>
+{% endblock %}
+
+

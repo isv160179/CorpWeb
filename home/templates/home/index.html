@@ -1,0 +1,91 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block extra_links %}
+    <!--    Шрифты от Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600&family=Raleway&display=swap"
+          rel="stylesheet">
+    <!--Стиль от SwiperJS -->
+    <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css"/>
+    <!-- Дополнительные стили -->
+    <link rel="stylesheet" href="{% static 'home/css/style.css' %}">
+{% endblock %}
+
+{% block content %}
+    <!-- Слайдер -->
+    <div class="content">
+        <div class="slider-container">
+            <!--        Текстовый слайдер-->
+            <div class="slider-text">
+                <div class="swiper-wrapper">
+                    {% for slide in slides %}
+                        <div class="swiper-slide slider-text_slide">
+                            <div class="slider-text_content">
+                                <h2 class="slider-text_heading">{{ slide.title }}</h2>
+                                <p class="slider-text_desc">{{ slide.content }}</p>
+                                <a {% if user.is_authenticated %}
+                                    href="{% url 'news' %}"
+                                    href="#"
+                                {% else %}
+                                    href="{% url 'login' %}"
+                                {% endif %}
+                                    class="button slider-text_button">Начать работу
+                                </a>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <!--        Слайдер картинок-->
+            <div class="slider-img">
+                <div class="swiper-wrapper">
+                    {% for slide in slides %}
+                        <div class="swiper-slide slider-img_slide">
+                            <div class="slider-img_bg" data-swiper-parallax="40%"
+                                 style="background-image: url('{{ slide.image.url }}')"></div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <!--        Подвал сайта-->
+            <div class=" slider-bottom">
+                <div class="slider-share">
+                    <div class="slider-share_items">
+                        <a href="{{ vk_link }}" class="soc-item" target="_blank">
+                            <svg class="icon">
+                                <use href="{% static 'home/img/sprite.svg' %}#vk"></use>
+                            </svg>
+                        </a>
+                        <a href="{{ whatsapp_link }}" class="soc-item" target="_blank">
+                            <svg class="icon">
+                                <use href="{% static 'home/img/sprite.svg' %}#whatsapp"></use>
+                            </svg>
+                        </a>
+                        <a href="{{ telegram_link }}" class="soc-item" target="_blank">
+                            <svg class="icon">
+                                <use href="{% static 'home/img/sprite.svg' %}#telegram"></use>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                <div class="slider-pagination">
+                    <div class="swiper-pagination"></div>
+                </div>
+                <div class="slider-scrollbar">
+                    <div class="swiper-scrollbar"></div>
+                </div>
+                <div class="slider-navigation">
+                    <div class="slider-navigation_container">
+                        <div class="swiper-button-prev"></div>
+                        <div class="swiper-button-next"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block extra_scripts %}
+    <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
+    <script src="{% static 'home/js/app.js' %}"></script>
+{% endblock %}

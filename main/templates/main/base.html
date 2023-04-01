@@ -1,0 +1,73 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>{{ title }}</title>
+    <meta name="description" content="">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="robots" content="all,follow">
+    <link rel="shortcut icon" href="{% static '/main/img/favicon.ico' %}">
+    <link rel="stylesheet" href="{% static 'main/css/style.css' %}">
+    {% block extra_links %}
+    {% endblock %}
+</head>
+
+<body>
+{# Шапка страницы #}
+<header class="header">
+    {# Панель навигации #}
+    <div class="nav">
+        <div class="logo-container">
+            {# Большой логотип для широких экранов #}
+            <a href="https://vb-rf.ru" target="_blank" class="logo big-logo">
+                <img class="logo-img" src="{% static 'main/img/full_logo.svg' %}" alt="Логотип"></a>
+            {# Малый логотип для мобильных устройств#}
+            <a href="https://vb-rf.ru" target="_blank" class="logo small-logo">
+                <img class="logo-img" src="{% static 'main/img/logo.svg' %}" alt="Логотип"></a>
+        </div>
+        {# Запись в середине навигационной панели #}
+        <div class="middle-container">{{ title }}</div>
+        {# Контейнер для кнопок #}
+        <div class="buttons-container">
+            {% if  request.user.is_anonymous %}
+                <a href="{% url 'login' %}" class="button-item">
+                    <svg class="nav-img">
+                        <use href="{% static 'main/img/sprite.svg' %}#login"></use>
+                    </svg>
+                </a>
+            {% else %}
+                {% if page == 'home' %}
+                    <a href="{% url 'news' %}" class="button-item">
+                        <svg class="nav-img">
+                            <use href="{% static 'main/img/sprite.svg' %}#login"></use>
+                        </svg>
+                    </a>
+                {% else %}
+                    {% block extra_buttons %}
+                    {% endblock %}
+                    {#                             Кнопка выхода из учетной записи #}
+                    <a href="{% url 'logout' %}" class="button-item">
+                        <svg class="nav-img">
+                            <use href="{% static 'main/img/sprite.svg' %}#logout"></use>
+                        </svg>
+                    </a>
+                {% endif %}
+            {% endif %}
+        </div>
+    </div>
+</header>
+    {# Содержание страницы #}
+    {% block content %}
+    {% endblock %}
+{# Подвал сайта #}
+{% block footer %}
+{% endblock %}
+
+{% block extra_scripts %}
+    {#блок для подключения допольнительных файлов скриптов#}
+{% endblock %}
+</body>
+</html>

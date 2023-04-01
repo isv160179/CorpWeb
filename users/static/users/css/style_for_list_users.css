@@ -1,0 +1,15 @@
+
+.container-detail {
+    width: calc(100vw - 295px);
+    background-color: #ffffff;
+    border-radius: 0.5em;
+    box-shadow: var(--shadow);
+}
+
+
+
+@media (max-width: 768px) {
+    .container-detail {
+        width: calc(100vw - 105px);
+    }
+}

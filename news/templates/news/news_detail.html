@@ -1,0 +1,133 @@
+{# Страница отображения выбранной новости #}
+{% extends 'main/index.html' %}
+{% load main_tags %}
+{#{% load news_tags %}#}
+{% load static %}
+{% block extra_links_detail %}
+    <link rel="stylesheet" href="{% static 'news/css/style-news_detail.css' %}">
+{% endblock %}
+{% block content_detail %}
+    <div class="container-detail">
+        <div class="news_detail_title">{{ news.title }}</div>
+        <div class="news_detail_body">
+            {% if news.image %}
+                <div class="news_detail_image_container">
+                    <img src="{{ news.image.url }}" alt="Фото новости" class="news_detail_image">
+                </div>
+            {% endif %}
+            <div class="news_detail_text">{{ news.content|linebreaks }}</div>
+        </div>
+        {# Комментарии #}
+        <div class="news_detail_comments">
+            {% with comments.count as total_comments %}
+                {% if total_comments %}
+                    <h2 id="news_comments">Сейчас у
+                        новости {{ total_comments }} {% choose_plural total_comments word_comments %}:</h2>
+                {% endif %}
+            {% endwith %}
+            {% for comment in comments %}
+                <div class="news_comments_container">
+                    <div class="news-comment_header">
+                        {% if comment.author.avatar %}
+                            <img class="news_comments_author_avatar" src="{{ comment.author.avatar }}"
+                                 alt="Аватарка">
+                        {% else %}
+                            <img class="news_comments_author_avatar"
+                                 src="{% static 'users/img/default_avatar.png' %}" alt="Аватарка">
+                        {% endif %}
+                        <div class="news_comments_author_container">
+                            <div class="news_comments_author_name">{{ comment.author }}</div>
+                            <div class="news_comments_author_department">{{ comment.author.department }}</div>
+                            <div class="news_comments_author_job-title">{{ comment.author.job_title }}</div>
+                        </div>
+                        <div class="news_comments_time">{{ comment.time_create }}</div>
+                    </div>
+                    <hr class="dropdown-divider">
+                    <div class="news_comments_text">{{ comment.content|linebreaks }}</div>
+                </div>
+            {% empty %}
+                <h2>Комментариев пока нет</h2>
+            {% endfor %}
+            {% if new_comment %}
+                <h2>Ваш комментарий добавлен</h2>
+            {% else %}
+                <form action="#news_comments" method="post">
+                    <div class="news_comment_input">{{ comment_form.content }}</div>
+                    {% csrf_token %}
+                    <button class="comment_add" type="submit">Добавить</button>
+                </form>
+            {% endif %}
+        </div>
+
+        {# Лайки #}
+        <div class="news_detail_likes">
+            {# Значок лайка #}
+            <form action="." method="post">
+                {% csrf_token %}
+                {{ like_form }}
+                <button class='news_detail_buttons_container' type="submit">
+                    <svg class="svg-news_like">
+                        {% if like_present %}}
+                            <use href="{% static 'news/img/sprite.svg' %}#dislike"></use>
+                        {% else %}
+                            <use href="{% static 'news/img/sprite.svg' %}#like"></use>
+                        {% endif %}
+                    </svg>
+                </button>
+            </form>
+            {# Значок комментария #}
+            <a href="#news_comments" class='news_detail_buttons_container'>
+                <svg class="svg-news_like">
+                    {% if new_comment %}
+                        <use href="{% static 'news/img/sprite.svg' %}#comment_fill"></use>
+                    {% else %}
+                        <use href="{% static 'news/img/sprite.svg' %}#comment"></use>
+                    {% endif %}
+                </svg>
+            </a>
+            {% with total_likes=likes.count %}
+                {% if like_present %}
+                    {% if  total_likes == 1 %}
+                        <h2 id="news_likes">Эта новость понравилась только Вам</h2>
+                        {% if request.user.avatar %}
+                            <img class="news_like_author_avatar" src="{{ request.user.avatar }}" alt="Аватарка">
+                        {% else %}
+                            <img class="news_like_author_avatar"
+                                 src="{% static 'users/img/default_avatar.png' %}" alt="Аватарка">
+                        {% endif %}
+                    {% else %}
+                        <h2 id="news_likes">Эта новость понравилась Вам и еще
+                            {% update_variable total_likes -1 as total_likes %}
+                            {{ total_likes }}
+                            {% choose_plural total_likes word_colleague %}:</h2>
+                        {% for like in likes %}
+                            {% if like.author.avatar %}
+                                <img class="news_like_author_avatar" src="{{ like.author.avatar }}" alt="Аватарка">
+                            {% else %}
+                                <img class="news_like_author_avatar"
+                                     src="{% static 'users/img/default_avatar.png' %}" alt="Аватарка">
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
+                {% else %}
+                    {% if  total_likes %}
+                        <h2 id="news_likes">Эта новость
+                            понравилась {{ total_likes }} {% choose_plural total_likes word_colleague %}:</h2>
+                        {% for like in likes %}
+                            {% if like.author.avatar %}
+                                <img class="news_like_author_avatar" src="{{ like.author.avatar }}" alt="Аватарка">
+                            {% else %}
+                                <img class="news_like_author_avatar"
+                                     src="{% static 'users/img/default_avatar.png' %}" alt="Аватарка">
+                            {% endif %}
+                        {% endfor %}
+                    {% else %}
+                        <h2 id="news_likes">Эту новость пока никто не оценил</h2>
+                    {% endif %}
+                {% endif %}
+            {% endwith %}
+        </div>
+    </div>
+{% endblock %}
+{% block extra_scripts %}
+{% endblock %}

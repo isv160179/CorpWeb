@@ -1,0 +1,205 @@
+:root {
+    --color-acept: rgb(244, 73, 43);
+    --color-start: rgb(26, 91, 147);
+    --color-end: rgb(35, 165, 217);
+    --color-middle: rgb(43, 128, 182);
+    --color-gradient: linear-gradient(180deg, var(--color-start) 0%, var(--color-end) 100%);
+    --color-gradient-reverse: linear-gradient(180deg, var(--color-end) 0%, var(--color-start) 100%);
+    --color-text-main: #686a76;
+    --color-background-main: #EEF5F9;
+    --color-background-hover: rgba(0, 0, 0, .2);
+    --shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+    --shadow-sm: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+}
+
+:active, :hover, :focus {
+    outline: 0;
+    outline-offset: 0;
+}
+
+body, html {
+    padding: 0;
+    margin: 0;
+    background-color: var(--color-background-main);
+}
+
+/*Контейнер под панель навигации*/
+.header {
+    width: 100%;
+    height: 100px;
+    position: fixed;
+    top: 0;
+    z-index: 50;
+    background-color: #EEF5F9;
+}
+
+/*Панель навигации*/
+.nav {
+    width: 98%;
+    height: 80px;
+    background: var(--color-gradient);
+    margin: 10px auto;
+    border-radius: 50em;
+    box-shadow: var(--shadow);
+    color: white;
+    display: flex;
+    justify-content: space-between;
+}
+
+/*Контейнер под общий логотип - левая часть*/
+
+.logo-container {
+    width: 250px;
+}
+
+
+.logo {
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50em;
+    transition: background .35s ease-out;
+}
+
+/*Контейнер под большой логотип*/
+.big-logo {
+    width: 250px;
+}
+
+/*Наведение на контейнер под логотип*/
+.logo:hover,
+.logo:focus {
+    background-color: rgba(0, 0, 0, .2);
+}
+
+/*Логотип*/
+.logo-img {
+    height: 50px;
+}
+
+/*Контейнер под среднюю часть*/
+.middle-container {
+    display: flex;
+    flex: 1 1 auto;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    text-transform: uppercase;
+    color: whitesmoke;
+    font-family: Roboto, sans-serif;
+    letter-spacing: 0.2em;
+    /*background-color: #22d831;*/
+}
+
+/*Контейнер под кнопки - правая часть*/
+.buttons-container {
+    flex: 0 0 250px;
+    display: flex;
+    position: relative;
+    justify-content: end;
+}
+
+/*Контейнер-кнопка для каждой иконки */
+.button-item {
+    width: 80px;
+    height: 80px;
+    display: flex;
+    position: relative;
+    justify-content: center;
+    transition: background .5s ease-out;
+    border-radius: 50em;
+}
+
+/*Выделение контейнера-кнопки при наведении*/
+.button-item:hover {
+    background-color: rgba(0, 0, 0, .2);
+}
+
+/*Иконка контейнера кнопки*/
+.nav-img {
+    width: 30px;
+    height: auto;
+    fill: white;
+    opacity: .8;
+    transition: opacity .35s ease-out;
+}
+
+/*Изменение иконки при наведении на контейнер-кнопку*/
+.button-item:hover .nav-img {
+    opacity: 1;
+}
+
+/*Контент первой страницы*/
+.content {
+    margin-top: 100px;
+}
+
+/*Адаптация*/
+@media (min-width: 769px) {
+    .big-logo {
+        display: flex;
+    }
+
+    .small-logo {
+        display: none;
+    }
+}
+
+@media (max-width: 768px) {
+
+    .header {
+        height: 50px!important;
+    }
+
+    .nav {
+        box-shadow: var(--shadow-sm);
+        margin-top: 0;
+        height: 50px;
+    }
+
+    .logo-container {
+        width: 100px;
+    }
+
+    .logo {
+        width: 50px;
+    }
+
+    .big-logo {
+        display: none;
+    }
+
+    .small-logo {
+        display: flex;
+        width: 50px;
+    }
+
+    .logo-img {
+        height: 28px;
+    }
+
+    .buttons-container {
+        flex: 0 0 100px;
+    }
+
+    .button-item {
+        width: 50px;
+        height: 50px;
+    }
+
+    .nav-img {
+        width: 20px;
+    }
+
+    .middle-container {
+        font-size: 12px;
+        letter-spacing: 0;
+        white-space: nowrap;
+    }
+
+    .content {
+        margin-top: 50px;
+    }
+
+}
+

@@ -1,0 +1,39 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block extra_links %}
+    <link rel="stylesheet" href="{% static 'users/css/style_for_base_template.css' %}">
+    {% block users-extra_links %}
+        {# Блок дополнительных ссылок подключения стилей формы #}
+    {% endblock %}
+{% endblock %}
+
+{% block content %}
+    <div class="content">
+        <form method="post">
+            {% csrf_token %}
+            <div class="form-content">
+                <div class="form-window">
+                    <div class="form-window_title">
+                        {% block users-form_title %}
+                            {# Блок шапки формы #}
+                        {% endblock %}
+                    </div>
+                    <div class="form-window_body">
+                        {% block users-form_text %}
+                            {# Блок элементов текста формы #}
+                        {% endblock %}
+                        {% block users-form_elements %}
+                            {# Блок элементов ввода формы #}
+                        {% endblock %}
+                    </div>
+                    <div class="form-window_footer">
+                        {% block users-form_footer %}
+                            {# Блок подвала формы #}
+                        {% endblock %}
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+{% endblock %}
